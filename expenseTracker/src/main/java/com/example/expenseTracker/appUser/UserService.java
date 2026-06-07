@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class UserService {
     private UserRepo userRepo;
     private UserToDTO userToDTO;
@@ -18,7 +17,7 @@ public class UserService {
     }
 
     public ResponseEntity<String> SignUp(appuser appuser){
-        if(userRepo.existsByUsername(appuser.getName())){
+        if(userRepo.existsByName(appuser.getName())){
             throw new AlreadyExists("UserName Already exists");
         }
         String pwd=appuser.getPassword();
@@ -28,13 +27,22 @@ public class UserService {
         return ResponseEntity.ok("User registered successfuly");
     }
 
-    public UserDto findByUsername(String username){
-        if(!userRepo.existsByUsername(username)){
+    public UserDto findByName(String username){
+        if(!userRepo.existsByName(username)){
             throw new NotFound("User name doesn't exisits");
         }
-        appuser appuser=userRepo.getByUsername(username);
+        appuser appuser=userRepo.getByName(username);
 
     return    userToDTO.toDTO(appuser);
+
+    }
+    public appuser findById(Long id){
+        if(!userRepo.existsById(id)){
+            throw new NotFound("User name doesn't exisits");
+        }
+        appuser appuser=userRepo.getById(id);
+
+        return appuser;
 
     }
 

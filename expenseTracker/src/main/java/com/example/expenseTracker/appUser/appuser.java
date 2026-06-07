@@ -2,6 +2,7 @@ package com.example.expenseTracker.appUser;
 import com.example.expenseTracker.Expense.expense;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,9 +15,9 @@ public class appuser {
     @Id
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-   String name;
-   String password;
+    private Long id;
+   private String name;
+   private String password;
     @OneToMany(mappedBy = "appuser",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
    private List<expense> expense= new ArrayList<>();
 }

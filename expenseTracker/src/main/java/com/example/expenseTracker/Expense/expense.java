@@ -12,7 +12,7 @@ import java.util.Date;
 public class expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private long id;
+    private Long id;
 
   private   BigDecimal amoount;
 
@@ -23,6 +23,6 @@ public class expense {
 
    private Date date;
    @ManyToOne(fetch=FetchType.LAZY)
-   @JoinColumn(name = "user-id")
+   @JoinColumn(name = "Userid")
    private appuser appuser;
 }
