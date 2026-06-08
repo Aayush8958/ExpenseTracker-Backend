@@ -16,13 +16,17 @@ public class UserService {
         this.userToDTO = userToDTO;
     }
 
-    public ResponseEntity<String> SignUp(appuser appuser){
-        if(userRepo.existsByName(appuser.getName())){
+    public ResponseEntity<String> CreateSignUp(signupRequest signupRequest){
+        if(userRepo.existsByName(signupRequest.getName())){
             throw new AlreadyExists("UserName Already exists");
         }
-        String pwd=appuser.getPassword();
+        appuser appuser=new appuser();
+
+        String pwd=signupRequest.getPassword();
         String hshpwd= BCrypt.hashpw(pwd,BCrypt.gensalt());
         appuser.setPassword(hshpwd);
+        appuser.setName(signupRequest.getName());
+
         userRepo.save(appuser);
         return ResponseEntity.ok("User registered successfuly");
     }

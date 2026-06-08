@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.Date;
 public class ExpenseDto {
     private Long id;
     private BigDecimal amount;
-    private Date date;
+    private LocalDate date;
 
     @Enumerated(EnumType.STRING)
     private ExpenseEnum cataegory;

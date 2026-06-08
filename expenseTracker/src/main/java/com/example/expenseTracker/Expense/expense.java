@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+
 @Data
 @Entity
 @Table
@@ -14,14 +15,14 @@ public class expense {
     @Id
     private Long id;
 
-  private   BigDecimal amoount;
+  private   BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Cataegory")
     private ExpenseEnum cataegory;
 
 
-   private Date date;
+   private LocalDate date;
    @ManyToOne(fetch=FetchType.LAZY)
    @JoinColumn(name = "Userid")
    private appuser appuser;

@@ -2,15 +2,11 @@ package com.example.expenseTracker.Expense;
 
 import com.example.expenseTracker.appUser.UserService;
 import com.example.expenseTracker.appUser.appuser;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,17 +19,31 @@ public class ExpenseService {
     public ResponseEntity<String> CreateExpense(ExpenseDto expenseDto){
         expense expense=new expense();
         expense.setId(expenseDto.getId());
-        expense.setAmoount(expenseDto.getAmount());
+        expense.setAmount(expenseDto.getAmount());
         expense.setDate(expenseDto.getDate());
        appuser user= userService.findById(expenseDto.getId());
         expense.setAppuser(user);
         expenseRepo.save(expense);
         return ResponseEntity.ok("Expense Created successfully");
     }
-    public ResponseEntity<List<ExpenseResponse>> getExpensesByidandDates(Long id, Date start,Date end){
+    public ResponseEntity<List<ExpenseResponse>> getExpensesByidandDates(Long id, LocalDate start,LocalDate end){
        List<expense> expenseList= expenseRepo.findByAppuserIdAndDateBetween(id,start,end);
 
 
 return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
     }
+    public ResponseEntity<List<ExpenseResponse>> getExpensesByidandDate(Long id, LocalDate start){
+        List<expense> expenseList= expenseRepo.findByAppuserIdAndDate(id,start);
+
+
+        return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
+    }
+
+    public ResponseEntity<List<ExpenseResponse>> getExpensesByid(Long id){
+
+        List<expense> expenseList=expenseRepo.findByAppuserId(id);
+
+        return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
+    }
+
 }
