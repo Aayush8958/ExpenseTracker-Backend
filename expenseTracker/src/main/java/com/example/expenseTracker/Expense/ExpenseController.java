@@ -8,10 +8,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class ExpenseController {
-    ExpenseService expenseService;
 
+
+    ExpenseService expenseService;
+    public ExpenseController(ExpenseService expenseService) {
+        this.expenseService = expenseService;
+    }
     @PostMapping("/ExpenseCreation")
     public ResponseEntity<String> NewExpense(@RequestBody ExpenseDto expenseDto){
         expenseService.CreateExpense(expenseDto);

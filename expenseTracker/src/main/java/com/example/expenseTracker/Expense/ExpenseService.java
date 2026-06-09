@@ -10,18 +10,25 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+
 public class ExpenseService {
     ExpenseRepo expenseRepo;
     ExpenseToDTO expenseToDTO;
     UserService userService;
 
+    public ExpenseService(ExpenseRepo expenseRepo, UserService userService, ExpenseToDTO expenseToDTO) {
+        this.expenseRepo = expenseRepo;
+        this.userService = userService;
+        this.expenseToDTO = expenseToDTO;
+    }
+
     public ResponseEntity<String> CreateExpense(ExpenseDto expenseDto){
         expense expense=new expense();
-        expense.setId(expenseDto.getId());
+
         expense.setAmount(expenseDto.getAmount());
         expense.setDate(expenseDto.getDate());
-       appuser user= userService.findById(expenseDto.getId());
+        expense.setCategory(expenseDto.getCategory());
+       appuser user= userService.findById(expenseDto.getUserId());
         expense.setAppuser(user);
         expenseRepo.save(expense);
         return ResponseEntity.ok("Expense Created successfully");

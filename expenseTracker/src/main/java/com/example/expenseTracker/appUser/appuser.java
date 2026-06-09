@@ -13,7 +13,6 @@ import java.util.List;
 @Table
 public class appuser {
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    private String name;

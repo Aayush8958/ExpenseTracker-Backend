@@ -1,5 +1,6 @@
 package com.example.expenseTracker.Expense;
 
+import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-08T17:24:58+0530",
+    date = "2026-06-10T03:04:29+0530",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
@@ -26,7 +27,7 @@ public class ExpenseToDTOImpl implements ExpenseToDTO {
         expenseDto.setId( expense.getId() );
         expenseDto.setAmount( expense.getAmount() );
         expenseDto.setDate( expense.getDate() );
-        expenseDto.setCataegory( expense.getCataegory() );
+        expenseDto.setCategory( expense.getCategory() );
 
         return expenseDto;
     }
@@ -37,12 +38,17 @@ public class ExpenseToDTOImpl implements ExpenseToDTO {
             return null;
         }
 
-        ExpenseResponse expenseResponse = new ExpenseResponse();
+        BigDecimal amount = null;
+        Date date = null;
+        ExpenseEnum category = null;
 
+        amount = expense.getAmount();
         if ( expense.getDate() != null ) {
-            expenseResponse.setDate( Date.from( expense.getDate().atStartOfDay( ZoneOffset.UTC ).toInstant() ) );
+            date = Date.from( expense.getDate().atStartOfDay( ZoneOffset.UTC ).toInstant() );
         }
-        expenseResponse.setCataegory( expense.getCataegory() );
+        category = expense.getCategory();
+
+        ExpenseResponse expenseResponse = new ExpenseResponse( amount, date, category );
 
         return expenseResponse;
     }

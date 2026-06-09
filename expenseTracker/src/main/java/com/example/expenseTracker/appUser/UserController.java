@@ -6,9 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 public class UserController {
     UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<String> Signup(@RequestBody signupRequest signupRequest){
         userService.CreateSignUp(signupRequest);

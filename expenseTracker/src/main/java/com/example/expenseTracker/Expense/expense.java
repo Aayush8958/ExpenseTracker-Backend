@@ -18,8 +18,8 @@ public class expense {
   private   BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Cataegory")
-    private ExpenseEnum cataegory;
+    @Column(name = "Category")
+    private ExpenseEnum category;
 
 
    private LocalDate date;

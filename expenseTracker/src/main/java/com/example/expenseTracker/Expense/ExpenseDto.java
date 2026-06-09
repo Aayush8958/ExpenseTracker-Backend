@@ -1,22 +1,21 @@
 package com.example.expenseTracker.Expense;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExpenseDto {
     private Long id;
+    private Long userId;
     private BigDecimal amount;
     private LocalDate date;
+    private ExpenseEnum category;
 
-    @Enumerated(EnumType.STRING)
-    private ExpenseEnum cataegory;
+
 }
