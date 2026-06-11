@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Data
@@ -15,7 +16,7 @@ import java.util.HashMap;
 public class ErrorResponse {
    private  final LocalDateTime timestamp;
    private  final String message;
-   private final HashMap<String ,String> errors;
+   private final Map<String ,String> errors;
    private final HttpStatus httpStatus;
 
 

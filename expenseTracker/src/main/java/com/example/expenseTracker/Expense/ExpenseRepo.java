@@ -22,4 +22,6 @@ public interface ExpenseRepo extends JpaRepository<expense,Long> {
     );
 
     List<expense> findByAppuserId(Long userId);
+
+
 }
