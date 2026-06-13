@@ -1,9 +1,8 @@
 package com.example.expenseTracker.Expense;
 
-import com.example.expenseTracker.appUser.UserService;
-import com.example.expenseTracker.appUser.appuser;
+import com.example.expenseTracker.AppUser.UserService;
+import com.example.expenseTracker.AppUser.Appuser;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,25 +26,25 @@ public class ExpenseService {
     }
 
     public ResponseEntity<String> CreateExpense(ExpenseDto expenseDto){
-        expense expense=new expense();
+        Expense expense=new Expense();
 
         expense.setAmount(expenseDto.getAmount());
         expense.setDate(expenseDto.getDate());
         expense.setCategory(expenseDto.getCategory());
-       appuser user= userService.findById(expenseDto.getUserId());
+       Appuser user= userService.findById(expenseDto.getUserId());
         expense.setAppuser(user);
         expenseRepo.save(expense);
         return ResponseEntity.ok("Expense Created successfully");
     }
     public ResponseEntity<List<ExpenseResponse>> getExpensesByidandDates(Long id, LocalDate start,LocalDate end){
-       List<expense> expenseList= expenseRepo.findByAppuserIdAndDateBetween(id,start,end);
+       List<Expense> expenseList= expenseRepo.findByAppuserIdAndDateBetween(id,start,end);
 
 
 return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
     }
 
     public ResponseEntity<List<ExpenseResponse>> getExpensesByidandDate(Long id, LocalDate start){
-        List<expense> expenseList= expenseRepo.findByAppuserIdAndDate(id,start);
+        List<Expense> expenseList= expenseRepo.findByAppuserIdAndDate(id,start);
 
 
         return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
@@ -53,7 +52,7 @@ return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
 
     public ResponseEntity<List<ExpenseResponse>> getExpensesByid(Long id){
 
-        List<expense> expenseList=expenseRepo.findByAppuserId(id);
+        List<Expense> expenseList=expenseRepo.findByAppuserId(id);
 
         return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
     }
@@ -64,17 +63,17 @@ return  ResponseEntity.ok(expenseToDTO.toDtoList(expenseList));
     }
     @Transactional
     public ResponseEntity<String> updateDate(Long id,LocalDate date){
-       Optional<expense> Optionalexpense= expenseRepo.findById(id);
+       Optional<Expense> Optionalexpense= expenseRepo.findById(id);
 
-        expense expense=Optionalexpense.get();
+        Expense expense=Optionalexpense.get();
         expense.setDate(date);
     return new ResponseEntity<>("Date updated",HttpStatus.CREATED);
     }
     @Transactional
     public ResponseEntity<String> updateAmount(Long id, BigDecimal amount){
-        Optional<expense> Optionalexpense= expenseRepo.findById(id);
+        Optional<Expense> Optionalexpense= expenseRepo.findById(id);
 
-        expense expense=Optionalexpense.get();
+        Expense expense=Optionalexpense.get();
         expense.setAmount(amount);
         return new ResponseEntity<>("amount updated",HttpStatus.CREATED);
     }

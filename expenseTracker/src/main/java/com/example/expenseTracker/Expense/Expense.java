@@ -1,6 +1,6 @@
 package com.example.expenseTracker.Expense;
 
-import com.example.expenseTracker.appUser.appuser;
+import com.example.expenseTracker.AppUser.Appuser;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table
-public class expense {
+public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -25,5 +25,5 @@ public class expense {
    private LocalDate date;
    @ManyToOne(fetch=FetchType.LAZY)
    @JoinColumn(name = "Userid")
-   private appuser appuser;
+   private Appuser appuser;
 }

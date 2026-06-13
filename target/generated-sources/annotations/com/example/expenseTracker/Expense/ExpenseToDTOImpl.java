@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-11T16:30:36+0530",
+    date = "2026-06-13T15:14:38+0530",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
 public class ExpenseToDTOImpl implements ExpenseToDTO {
 
     @Override
-    public ExpenseDto toDto(expense expense) {
+    public ExpenseDto toDto(Expense expense) {
         if ( expense == null ) {
             return null;
         }
@@ -33,7 +33,7 @@ public class ExpenseToDTOImpl implements ExpenseToDTO {
     }
 
     @Override
-    public ExpenseResponse toDTO(expense expense) {
+    public ExpenseResponse toDTO(Expense expense) {
         if ( expense == null ) {
             return null;
         }
@@ -54,13 +54,13 @@ public class ExpenseToDTOImpl implements ExpenseToDTO {
     }
 
     @Override
-    public List<ExpenseResponse> toDtoList(List<expense> expenseList) {
+    public List<ExpenseResponse> toDtoList(List<Expense> expenseList) {
         if ( expenseList == null ) {
             return null;
         }
 
         List<ExpenseResponse> list = new ArrayList<ExpenseResponse>( expenseList.size() );
-        for ( expense expense : expenseList ) {
+        for ( Expense expense : expenseList ) {
             list.add( toDTO( expense ) );
         }
 

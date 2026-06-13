@@ -1,4 +1,4 @@
-package com.example.expenseTracker.appUser;
+package com.example.expenseTracker.AppUser;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

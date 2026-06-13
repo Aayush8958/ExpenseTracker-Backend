@@ -1,22 +1,20 @@
-package com.example.expenseTracker.appUser;
-import com.example.expenseTracker.Expense.expense;
+package com.example.expenseTracker.AppUser;
+import com.example.expenseTracker.Expense.Expense;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.query.sql.internal.ParameterRecognizerImpl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
 @Table
-public class appuser {
+public class Appuser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
    private String name;
    private String password;
     @OneToMany(mappedBy = "appuser",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
-   private List<expense> expense= new ArrayList<>();
+   private List<Expense> expense= new ArrayList<>();
 }

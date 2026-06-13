@@ -1,4 +1,4 @@
-package com.example.expenseTracker.appUser;
+package com.example.expenseTracker.AppUser;
 
 import com.example.expenseTracker.ExceptionS.AlreadyExists;
 import com.example.expenseTracker.ExceptionS.NotFound;
@@ -20,7 +20,7 @@ public class UserService {
         if(userRepo.existsByName(signupRequest.getName())){
             throw new AlreadyExists("UserName Already exists");
         }
-        appuser appuser=new appuser();
+        Appuser appuser=new Appuser();
 
         String pwd=signupRequest.getPassword();
         String hshpwd= BCrypt.hashpw(pwd,BCrypt.gensalt());
@@ -31,23 +31,27 @@ public class UserService {
         return ResponseEntity.ok("User registered successfuly");
     }
 
-    public UserDto findByName(String username){
+    public Appuser findAppuserName(String username){
         if(!userRepo.existsByName(username)){
             throw new NotFound("User name doesn't exisits");
         }
-        appuser appuser=userRepo.getByName(username);
+        Appuser appuser=userRepo.getByName(username);
 
-    return    userToDTO.toDTO(appuser);
+        return  appuser;
 
     }
-    public appuser findById(Long id){
+
+    public Appuser findById(Long id){
         if(!userRepo.existsById(id)){
             throw new NotFound("User name doesn't exisits");
         }
-        appuser appuser=userRepo.getById(id);
+        Appuser appuser=userRepo.getById(id);
 
         return appuser;
 
+    }
+    public boolean ExistByName(String name ){
+        return userRepo.existsByName(name);
     }
 
 }

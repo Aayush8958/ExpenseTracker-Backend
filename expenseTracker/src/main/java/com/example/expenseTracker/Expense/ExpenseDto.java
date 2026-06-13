@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExpenseDto {
-    @NotNull(message = "id can't be empty")
+
     private Long id;
     @NotNull(message = "Userid can't be empty")
     private Long userId;
